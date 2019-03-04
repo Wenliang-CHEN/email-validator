@@ -1,6 +1,6 @@
 package rules
 
-type Rule struct {
-	Pattern string
-	ErrorMsg string
+type Rule interface {
+	GetPattern() string
+	GetErrorMessage(sample string) string
 }

@@ -14,7 +14,8 @@ func main() {
 		os.Exit(0)
 	}
 
-	rules := slice.Reject(GetRules(), os.Args[1], match)
+	sample := os.Args[1]
+	rules := slice.Reject(GetRules(), sample, match)
 	if len(rules) == 0 {
 		fmt.Println("Email valid")
 		os.Exit(0)
@@ -22,12 +23,12 @@ func main() {
 
 	fmt.Println("Email invalid: ")
 	slice.Each(rules, func(rule Rule) {
-		fmt.Printf("%v\n", rule.ErrorMsg)
+		fmt.Printf("%v\n", rule.GetErrorMessage(sample))
 	})
 }
 
 var match = func(rule Rule, sample string) bool {
-	match, err := regexp.MatchString(rule.Pattern, sample)
+	match, err := regexp.MatchString(rule.GetPattern(), sample)
 
 	if err != nil {
 		return false
