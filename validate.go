@@ -3,6 +3,7 @@ package main
 import (
 	. "validator/rules"
 	slice "validator/rules/utils"
+	factory "validator/rules/factories"
 	"fmt"
 	"regexp"
 	"os"
@@ -15,7 +16,7 @@ func main() {
 	}
 
 	sample := os.Args[1]
-	rules := slice.Reject(GetRules(), sample, match)
+	rules := slice.Reject(factory.GetRules(), sample, match)
 	if len(rules) == 0 {
 		fmt.Println("Email valid")
 		os.Exit(0)

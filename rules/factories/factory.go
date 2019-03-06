@@ -1,4 +1,8 @@
-package rules
+package factories
+
+import (
+	. "validator/rules"
+)
 
 func GetRules() []Rule {
 	rules := make([]Rule, 0)
